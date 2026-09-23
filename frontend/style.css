@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 40px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.answer {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    cursor: pointer;
+}
+
+#submit {
+    margin-top: 20px;
+    padding: 12px 25px;
+}
