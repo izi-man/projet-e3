@@ -91,3 +91,40 @@ def test_negative_response_time():
     )
 
     assert response.status_code == 422
+
+
+def test_model_accepts_expected_features():
+    features = pd.DataFrame([{
+        "temps_reponse": 2.5,
+        "nb_erreurs": 1,
+        "score": 80
+    }])
+
+    prediction = model.predict(features)
+
+    assert len(prediction) == 1
+    assert prediction[0] in [0, 1]
+
+
+def test_model_probability_is_valid():
+    features = pd.DataFrame([{
+        "temps_reponse": 2.5,
+        "nb_erreurs": 1,
+        "score": 80
+    }])
+
+    probabilities = model.predict_proba(features)[0]
+
+    assert len(probabilities) == 2
+    assert all(0 <= probability <= 1 for probability in probabilities)
+    assert abs(sum(probabilities) - 1) < 0.001
+
+
+def test_model_has_expected_features():
+    expected_features = [
+        "temps_reponse",
+        "nb_erreurs",
+        "score"
+    ]
+
+    assert list(model.feature_names_in_) == expected_features
